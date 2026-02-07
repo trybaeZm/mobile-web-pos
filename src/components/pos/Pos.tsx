@@ -177,7 +177,7 @@ export default function POSPage({ business }: POSPageProps) {
                 isOpen={paystatus == "failed"}
                 onClose={() => setPayStatus("")}
             />
-            <div className="flex md:hidden flex-col items-center justify-center min-h-[60vh] text-center p-6">
+            <div className="flex hidden flex-col items-center justify-center min-h-[60vh] text-center p-6">
                 <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-sm max-w-sm">
                     {/* Icon */}
                     <div className="flex justify-center mb-6">
@@ -219,7 +219,7 @@ export default function POSPage({ business }: POSPageProps) {
                     </div>
                 </div>
             </div>
-            <div className='hidden md:block'>
+            <div className=' md:block'>
                 <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
                     <div className="max-w-7xl mx-auto">
                         {/* Header */}

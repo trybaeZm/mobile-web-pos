@@ -10,6 +10,8 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const queryClient = new QueryClient()
 
+import NavigationLayout from "@/components/layout/NavigationLayout";
+
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
     return (
         <Provider store={store}>
@@ -17,7 +19,9 @@ export default function ClientProviders({ children }: { children: React.ReactNod
                 <SnackbarProvider>
                     <ThemeProvider>
                         <InitUserData>
-                            {children}
+                            <NavigationLayout>
+                                {children}
+                            </NavigationLayout>
                         </InitUserData>
                     </ThemeProvider>
                 </SnackbarProvider>
