@@ -177,97 +177,20 @@ export default function POSPage({ business }: POSPageProps) {
                 isOpen={paystatus == "failed"}
                 onClose={() => setPayStatus("")}
             />
-            <div className="flex hidden flex-col items-center justify-center min-h-[60vh] text-center p-6">
-                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-sm max-w-sm">
-                    {/* Icon */}
-                    <div className="flex justify-center mb-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur-lg opacity-30" />
-                            <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-xl">
-                                <svg
-                                    className="w-10 h-10 text-white"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={1.5}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                                </svg>
-                            </div>
-                        </div>
+            {/* Mobile Restriction Removed */}
+
+            <div className='block min-h-screen bg-gray-50 dark:bg-gray-900 p-4 pb-20 lg:p-4'> {/* Added pb-20 for mobile scroll space if needed */}
+                <div className="max-w-7xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-6">
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Point of Sale</h1>
+                        <p className="text-gray-600 dark:text-gray-400">Manage your sales and transactions</p>
                     </div>
 
-                    {/* Title */}
-                    <h2 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 dark:from-gray-100 dark:to-purple-400 bg-clip-text text-transparent mb-3">
-                        Available on Tablet & PC
-                    </h2>
+                    <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6">
 
-                    {/* Description */}
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                        The Point of Sale system is optimized for larger screens to give you the best experience.
-                    </p>
-
-                    {/* Coming Soon Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200 dark:border-blue-800/50 rounded-xl">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-                        </span>
-                        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                            Mobile Coming Soon
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div className=' md:block'>
-                <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
-                    <div className="max-w-7xl mx-auto">
-                        {/* Header */}
-                        <div className="mb-6">
-                            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Point of Sale</h1>
-                            <p className="text-gray-600 dark:text-gray-400">Manage your sales and transactions</p>
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            {/* Products Section */}
-                            <div className="lg:col-span-2 space-y-6">
-                                {/* Search and Filter */}
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg">
-                                    <div className="flex flex-col sm:flex-row gap-4">
-                                        <div className="flex-1 relative">
-                                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                                            <input
-                                                type="text"
-                                                placeholder="Search products..."
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            />
-                                        </div>
-                                        <select
-                                            value={selectedCategory}
-                                            onChange={(e) => setSelectedCategory(e.target.value)}
-                                            className="px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        >
-                                            {categories.map((category: any) => (
-                                                <option key={category} value={category}>{category}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                {/* Products Grid */}
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg">
-                                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Products</h2>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                        {filteredProducts?.map((product, key) => (
-                                            <ProductCard cart={cart} key={key} productsInv={productsInv?.filter(inv => inv.id == product.id)[0]} product={product} addToCart={addToCart} />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Cart & Payment Section */}
+                        {/* Cart & Payment Section - Mobile: Top, Desktop: Right */}
+                        <div className="order-1 lg:order-2 lg:col-span-1 sticky top-2 z-20 lg:static">
                             <CartPaymentSection
                                 cart={cart}
                                 setPayableUSerData={setPayableUSerData}
@@ -286,6 +209,46 @@ export default function POSPage({ business }: POSPageProps) {
                                 cashAmount={cashAmount}
                                 processPayment={processPayment} />
                         </div>
+
+                        {/* Products Section - Mobile: Bottom, Desktop: Left */}
+                        <div className="order-2 lg:order-1 lg:col-span-2 space-y-6">
+                            {/* Search and Filter */}
+                            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg">
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                    <div className="flex-1 relative">
+                                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                        <input
+                                            type="text"
+                                            placeholder="Search products..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        />
+                                    </div>
+                                    <select
+                                        value={selectedCategory}
+                                        onChange={(e) => setSelectedCategory(e.target.value)}
+                                        className="px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    >
+                                        {categories.map((category: any) => (
+                                            <option key={category} value={category}>{category}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* Products Grid */}
+                            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg">
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Products</h2>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {filteredProducts?.map((product, key) => (
+                                        <ProductCard cart={cart} key={key} productsInv={productsInv?.filter(inv => inv.id == product.id)[0]} product={product} addToCart={addToCart} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
