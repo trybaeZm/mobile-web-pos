@@ -390,7 +390,7 @@ const Signup = () => {
                         )}
 
                         {(isLogin || signupStep === 'form') && (
-                            <div className="space-y-6 pt-2">
+                            <div className=" hidden space-y-6 pt-2">
                                 <div className="relative">
                                     <div className="absolute inset-0 flex items-center">
                                         <div className="w-full border-t border-white/10"></div>
