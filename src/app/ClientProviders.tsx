@@ -12,16 +12,16 @@ const queryClient = new QueryClient()
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
     return (
-        // <Provider store={store}> // Already in RootLayout
-        <QueryClientProvider client={queryClient}>
-            <SnackbarProvider>
-                <ThemeProvider>
-                    <InitUserData>
-                        {children}
-                    </InitUserData>
-                </ThemeProvider>
-            </SnackbarProvider>
-        </QueryClientProvider>
-        // </Provider>
+        <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+                <SnackbarProvider>
+                    <ThemeProvider>
+                        <InitUserData>
+                            {children}
+                        </InitUserData>
+                    </ThemeProvider>
+                </SnackbarProvider>
+            </QueryClientProvider>
+        </Provider>
     );
 }
