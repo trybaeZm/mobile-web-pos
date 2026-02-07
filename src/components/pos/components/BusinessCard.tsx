@@ -24,7 +24,7 @@ export const BusinessCard = ({ data, onSelect }: BusinessCardProps) => {
     // I should probably use a generic `getPublicUrl` or similar, but let's stick to what we have or mock if risk is high.
     // Actually, I'll update it to try fetching.
     const getImages = async () => {
-        if (data?.imageName) {
+        if (data?.imageName && data.id) {
             // Note: This uses 'products/' prefix from the shared service. 
             // If business images are elsewhere, this might fail. 
             // But without a specific `apiBusiness` image fetcher, this is the best guess or I can inline the supabase call.

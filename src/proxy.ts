@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { checkIfTokenIsNotExpired } from './services/token'
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
     const token = req.nextUrl.searchParams.get('token')
     let localToken = req.cookies.get('userToken')?.value
 
