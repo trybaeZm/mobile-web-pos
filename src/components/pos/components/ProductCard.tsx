@@ -119,7 +119,7 @@ export const ProductCard = ({ product, addToCart, cart, productsInv }: { cart: C
                 onClose={() => setIsOpen(false)}
                 productName={product.name}
             />
-            <button
+            <div
                 key={product.id}
                 className={`
         border flex flex-col items-start rounded-xl p-4 transition-shadow cursor-pointer 
@@ -129,7 +129,6 @@ export const ProductCard = ({ product, addToCart, cart, productsInv }: { cart: C
                     }
     `}
                 onClick={() => HundleOnClick()}
-                disabled={((productsInv?.quantity ?? 0) - (productsInv?.sales ?? 0)) <= 0}
             >
                 <div className="flex w-full justify-between items-start mb-2">
                     <h3 className="font-medium text-gray-900 dark:text-white">{product.name}</h3>
@@ -199,7 +198,7 @@ export const ProductCard = ({ product, addToCart, cart, productsInv }: { cart: C
                         <Plus className="w-4 h-4" />
                     </button>
                 </div>
-            </button>
+            </div>
 
         </>
     )

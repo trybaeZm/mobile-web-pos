@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import POSPage from '@/components/pos/Pos';
 import { useRouter } from 'next/navigation';
 import { BusinessType } from '@/types/businesses';
+import { getOrgData } from '@/lib/createCookie';
 
 
 export default function PosRoute() {
@@ -11,21 +12,15 @@ export default function PosRoute() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const storedBusiness = sessionStorage.getItem('selectedBusiness');
-        if (!storedBusiness) {
+        const business = getOrgData() as BusinessType | null;
+
+        if (!business) {
             router.push('/');
             return;
         }
 
-        try {
-            const business = JSON.parse(storedBusiness);
-            setSelectedBusiness(business);
-        } catch (e) {
-            console.error("Failed to parse business data", e);
-            router.push('/');
-        } finally {
-            setLoading(false);
-        }
+        setSelectedBusiness(business);
+        setLoading(false);
     }, [router]);
 
     if (loading) {

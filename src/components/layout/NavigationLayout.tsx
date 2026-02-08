@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -14,6 +14,11 @@ import {
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
+import { useDispatch } from 'react-redux';
+import { clearUserDetails } from '@/store/features/userDetailsSlice';
+import { removeData, getOrgData } from '@/lib/createCookie';
+import { BusinessType } from '@/types/businesses';
+
 interface NavigationLayoutProps {
     children: React.ReactNode;
 }
@@ -21,7 +26,16 @@ interface NavigationLayoutProps {
 export default function NavigationLayout({ children }: NavigationLayoutProps) {
     const pathname = usePathname();
     const router = useRouter();
+    const dispatch = useDispatch();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [businessName, setBusinessName] = useState<string>('');
+
+    useEffect(() => {
+        const businessData = getOrgData() as BusinessType | null;
+        if (businessData && businessData.business_name) {
+            setBusinessName(businessData.business_name);
+        }
+    }, []);
 
     // Hide navigation on auth pages
     if (pathname === '/signin' || pathname === '/signup') {
@@ -29,7 +43,7 @@ export default function NavigationLayout({ children }: NavigationLayoutProps) {
     }
 
     const navItems = [
-        { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+        { name: 'Business', href: '/', icon: LayoutDashboard },
         { name: 'POS', href: '/pos', icon: ShoppingCart },
         { name: 'Inventory', href: '/inventory', icon: Store }, // Placeholder route
         { name: 'Settings', href: '/settings', icon: Settings }, // Placeholder route
@@ -37,9 +51,12 @@ export default function NavigationLayout({ children }: NavigationLayoutProps) {
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-    const handleSignOut = () => {
-        // Implement sign out logic here (clear cookies, etc.)
-        // For now just redirect to signin
+    const handleSignOut = async () => {
+        // Clear user details from Redux
+        dispatch(clearUserDetails());
+        // Remove token and business data
+        await removeData();
+        // Redirect to signin
         router.push('/signin');
     };
 
@@ -57,9 +74,9 @@ export default function NavigationLayout({ children }: NavigationLayoutProps) {
                 <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
                     <Link href="/" className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">T</span>
+                            <span className="text-white font-bold text-lg">{businessName ? businessName.charAt(0) : 'T'}</span>
                         </div>
-                        <span className="text-xl font-bold text-gray-800 dark:text-white">Trybae POS</span>
+                        <span className="text-xl font-bold text-gray-800 dark:text-white">{businessName || 'Trybae POS'}</span>
                     </Link>
 
                     <button
