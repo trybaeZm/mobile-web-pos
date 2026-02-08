@@ -261,6 +261,12 @@ export const StepByStepTransaction2 = ({
     const searchUser = async (phoneNumber: string) => {
         setIsSearching(true);
         try {
+            if (!businessData?.id) {
+                console.log(businessData)
+                console.error("Business ID not found");
+                setUserExists(false);
+                return;
+            }
             const responsefromCustomerTable = await getCustomerbyPhoneandBusiness(phoneNumber, businessData.id)
             if (responsefromCustomerTable) {
                 setUserExists(true);

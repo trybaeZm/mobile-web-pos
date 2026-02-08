@@ -32,10 +32,17 @@ export const CartPaymentSection = ({ cart, setPayableUSerData, setCart, customer
     const total = subtotal - discount;
 
 
-    const handleConfirm = (userData: Partial<Customers> | null) => {
+    const handleConfirmAnonymous = (userData: Partial<Customers> | null) => {
         if (userData) {
             processPayment(userData)
             setShowDialog(false)
+        }
+    }
+
+    const handleConfirmUser = (userData: Partial<Customers> | null) => {
+        if (userData) {
+            processPayment(userData)
+            setShowDialog2(false)
         }
     }
 
@@ -49,13 +56,13 @@ export const CartPaymentSection = ({ cart, setPayableUSerData, setCart, customer
             <StepByStepTransaction
                 isOpen={showDialog}
                 onClose={() => setShowDialog(false)}
-                onComplete={handleConfirm}
+                onComplete={handleConfirmAnonymous}
             />
 
             <StepByStepTransaction2
                 isOpen={showDialog2}
                 onClose={() => setShowDialog2(false)}
-                onComplete={handleConfirm}
+                onComplete={handleConfirmUser}
             />
             <div className="space-y-6">
 
@@ -176,8 +183,6 @@ export const CartPaymentSection = ({ cart, setPayableUSerData, setCart, customer
                         )}
                     </div>
                 </div>
-
-
             </div>
         </>
     )

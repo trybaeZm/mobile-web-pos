@@ -7,6 +7,7 @@ import { getBusinessByOwnerID } from '@/services/api/apiBusiness';
 import { BusinessType } from '@/types/businesses';
 import { BusinessCard } from '@/components/pos/components/BusinessCard';
 import { AlertCircle, Filter, Plus, Search, X } from 'lucide-react';
+import { storeOrgData } from '@/lib/createCookie';
 
 export default function Home() {
   const user = useSelector((state: RootState) => state.userDetails);
@@ -41,7 +42,7 @@ export default function Home() {
   }, [user?.id]);
 
   const handleSelectBusiness = (business: BusinessType) => {
-    sessionStorage.setItem('selectedBusiness', JSON.stringify(business));
+    storeOrgData(business);
     router.push('/pos');
   };
 
